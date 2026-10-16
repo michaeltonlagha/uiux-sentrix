@@ -1,6 +1,7 @@
 import { useState, type ComponentType, type SVGProps } from 'react'
 import * as Icons from 'lucide-react'
 import { navItems, stats, alerts, incidents, insights, type AlertSeverity } from './mock-data'
+import CameraSourcesPage from './CameraSourcesPage'
 
 type IconName = keyof typeof Icons
 type IconProps = SVGProps<SVGSVGElement> & { size?: number | string; strokeWidth?: number | string }
@@ -47,4 +48,4 @@ function CameraHealthCard() { return <section className="panel health-panel"><di
 
 function QuickInsightsPanel() { return <section className="panel insights-panel"><div className="panel-title"><h2>Quick Insights</h2></div>{insights.map(([ic, title, detail]) => { const InsightIcon = icon(ic); return <button className="insight-row" key={title}><InsightIcon size={19} /><span><strong>{title}</strong><small>{detail}</small></span><Icons.ChevronRight size={16} /></button> })}</section> }
 
-export default function App() { const [active, setActive] = useState('Dashboard'); const [menuOpen, setMenuOpen] = useState(false); return <div className="app-shell"><AppSidebar active={active} onSelect={setActive} open={menuOpen} onClose={() => setMenuOpen(false)} /><div className="main-shell"><TopHeader onMenu={() => setMenuOpen(true)} /><main className="dashboard"><PageHeader /><div className="stats-grid">{stats.map(stat => <StatCard key={stat.label} stat={stat} />)}</div><div className="primary-grid"><ThreatScoreCard /><ActiveAlertsPanel /><LiveCameraPanel /></div><div className="secondary-grid"><RecentIncidentsTable /><FacilityOverview /><CameraHealthCard /><QuickInsightsPanel /></div></main></div></div> }
+export default function App() { const [active, setActive] = useState('Dashboard'); const [menuOpen, setMenuOpen] = useState(false); const handleSelect = (item: string) => setActive(item); return <div className="app-shell"><AppSidebar active={active} onSelect={handleSelect} open={menuOpen} onClose={() => setMenuOpen(false)} /><div className="main-shell"><TopHeader onMenu={() => setMenuOpen(true)} />{active === 'Camera Sources' ? <CameraSourcesPage /> : <main className="dashboard"><PageHeader /><div className="stats-grid">{stats.map(stat => <StatCard key={stat.label} stat={stat} />)}</div><div className="primary-grid"><ThreatScoreCard /><ActiveAlertsPanel /><LiveCameraPanel /></div><div className="secondary-grid"><RecentIncidentsTable /><FacilityOverview /><CameraHealthCard /><QuickInsightsPanel /></div></main>}</div></div> }
