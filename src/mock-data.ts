@@ -1,7 +1,7 @@
 export type AlertSeverity = 'High' | 'Medium' | 'Low'
 
 export const navItems = [
-  ['Dashboard', 'LayoutDashboard'], ['Live Monitoring', 'MonitorPlay'], ['Incidents', 'Siren'], ['Camera Sources', 'Video'], ['Devices', 'HardDrive'], 
+  ['Dashboard', 'LayoutDashboard'], ['Live Monitoring', 'MonitorPlay'], ['Incidents', 'Siren'], ['Camera Sources', 'Video'], ['Facility Map', 'MapPinned'], ['Devices', 'HardDrive'], 
   ['AI Analytics', 'Waypoints'], ['Alerts', 'BellRing'], ['Reports', 'FileBarChart'], ['Sites', 'Building2'],
   ['Users & Access', 'UsersRound'], ['System Settings', 'Settings2'],
 ] as const
